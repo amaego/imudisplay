@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PIPESTREAM - IMU Display</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="importmap">
+    { "imports": {
+        "three": "./lib/three/three.module.min.js",
+        "three/addons/": "./lib/three/addons/"
+    } }
+  </script>
+</head>
+<body>
+  <aside id="panel">
+    <h1>PIPESTREAM – IMU Display</h1>
+
+    <label for="connType">Connection Type</label>
+    <select id="connType">
+      <option value="ble">Bluetooth</option>
+      <option value="serial">Serial</option>
+      <option value="demo">Demo (simulated)</option>
+    </select>
+
+    <div id="bleOpts" class="opts">
+      <label for="bleName">Device name</label>
+      <input id="bleName" value="PIPESTREAM_IMU_BLE" placeholder="empty = show all devices">
+    </div>
+    <div id="serialOpts" class="opts" hidden>
+      <label for="baud">Baud rate</label>
+      <select id="baud">
+        <option>9600</option><option>57600</option><option selected>115200</option>
+        <option>230400</option><option>460800</option><option>921600</option>
+      </select>
+    </div>
+
+    <button id="btnConnect" class="primary">Connect</button>
+    <button id="btnDisconnect" class="danger" hidden>Disconnect</button>
+
+    <div id="status" class="status">Not connected</div>
+    <div id="support" class="warn" hidden></div>
+
+    <h2>Data</h2>
+    <dl class="stats">
+      <dt>Rate</dt><dd id="rate">–</dd>
+      <dt>Heading</dt><dd id="heading">–</dd>
+    </dl>
+    <table class="quats">
+      <thead><tr><th></th><th>w</th><th>x</th><th>y</th><th>z</th></tr></thead>
+      <tbody>
+        <tr><th><i class="dot" style="background:#2fc96b"></i>Q1</th><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+        <tr><th><i class="dot" style="background:#1f4fd9"></i>Q2</th><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+        <tr><th><i class="dot" style="background:#e53935"></i>Q3</th><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+      </tbody>
+    </table>
+    <div id="lastLine" class="lastline" title="Last received line"></div>
+
+    <button id="btnResetView">Reset view</button>
+  </aside>
+
+  <main id="view">
+    <div id="loading">Loading 3D model…</div>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
